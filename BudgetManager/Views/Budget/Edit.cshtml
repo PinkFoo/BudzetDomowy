@@ -1,0 +1,84 @@
+﻿@model BudgetManager.Models.Budget
+
+@{
+    ViewBag.Title = "Edit";
+}
+    <style>
+        #formularz {
+            transform: translate(25%, 0%);
+            color:black;
+        }
+        #error1{
+            color: firebrick;
+        }
+        #stworz {
+            transform: translate(50%, 0%);
+            padding-top: 30px;
+        }
+
+        #wyd {
+            transform: translate(26%, 0%);
+            padding-bottom: 20px;
+        }
+
+        #dodaj {
+            transform: translate(8%, 0%);
+        }
+
+        #powr {
+            transform: translate(50%, 0%);
+        }
+    </style>
+
+<h2 id="stworz">Edytuj</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" id="formularz">
+        <h4 id="wyd">Budżet</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BudgetID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmountBud, "Budżet:", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmountBud, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmountBud, "", new { @class = "text-danger" })
+            <p id="error1" class="error">   @ViewBag.errorUjemny</p>
+        </div>
+       
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateBud, "Miesiąc:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateBud, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateBud, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameBud, "Tutuł:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameBud, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameBud, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="dodaj">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Zapisz" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="powr">
+    <h3>   @Html.ActionLink("Back to List", "Index") </h3>
+</div>
+
+

@@ -1,0 +1,96 @@
+﻿@model BudgetManager.Models.Expense
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    #usun{
+        background-color: red;
+    }
+    #us{
+       transform: translate(46%,0%);
+    }
+    #po{
+        transform: translate(30%,0%);
+    }
+    #op{
+        transform: translate(35%, 0%);
+        color:black;
+    }
+    #dol{
+        transform: translateX(12%);
+    }
+    #pow{
+        transform: translateX(8%);
+    }
+</style>
+
+
+<h2 id="us">Usuń</h2>
+
+<h3 id="po">Czy na pewno usunąć wybrany wydatek?</h3>
+<div id="op">
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget.NameBud):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Budget.NameBud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.NazwaKat):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.NazwaKat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.NazwaUzyt):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.NazwaUzyt)
+        </dd>
+
+        <dt>
+            Opis:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateExp):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateExp)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" id="dol">
+            <input type="submit" value="Usuń" id="usun" class="btn btn-default" />
+        </div>
+        <h3 id="pow">
+            @Html.ActionLink("Powrót do listy", "Index")
+        </h3>
+    }
+</div>

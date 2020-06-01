@@ -1,0 +1,126 @@
+﻿@model BudgetManager.Models.Budget
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<style>
+    #tab{
+        transform: translateX(35%);
+        padding-bottom: 30px;
+    }
+    #sz{
+        padding-top: 20px;
+    }
+    #tt{
+        padding-top:30px;
+        color:black;
+    }
+    #nn
+    {
+        padding-top: 30px;
+         color: black;
+        background-color: rgba(238, 242, 233,.7);
+    }
+    #roznica{
+        color:darkmagenta;
+    }
+    
+</style>
+
+<h2 id="sz">Szczegóły</h2>
+
+<div id="tt">
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Zasób budżetu:
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmountBud)
+
+           
+
+        </dd>
+        <dt>
+            
+            Do tej pory wydano:
+        </dt>
+        <dd >
+         
+            
+            @Html.ViewBag.Sumka zł
+        </dd>
+        <dt>
+            Pozostało:
+        </dt>
+        <dd id="roznica">
+            @Html.ViewBag.Roznica zł
+        </dd>
+        <dt>
+            Miesiąc:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateBud)
+        </dd>
+
+        <dt>
+          Tytuł:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameBud)
+        </dd>
+     
+        
+
+
+    </dl>
+</div>
+<div>
+    
+    <h3 id="tab"> Wydatki w tym budżecie:</h3> 
+   
+        <table class="table table-hover" id="nn">
+            <tr>
+                <th>Użytkownik</th>
+                <th>Opis</th>
+                <th>Data wydatku</th>
+                <th>Kategoria</th>
+                <th>Kwota</th>
+
+            </tr>
+            @foreach (var item in Model.Expenses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.NazwaUzyt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateExp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.NazwaKat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                </tr>
+            }
+        </table>
+  
+</div>
+<p>
+    <h3> @Html.ActionLink("Edytuj", "Edit", new { id = Model.BudgetID }) |   @Html.ActionLink("Powrót do listy", "Index")</h3>  
+  
+</p>
+
+

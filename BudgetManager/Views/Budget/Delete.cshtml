@@ -1,0 +1,81 @@
+﻿@model BudgetManager.Models.Budget
+
+@{
+    ViewBag.Title = "Delete";
+}
+    <style>
+        #usun {
+            background-color: red;
+             transform: translateX(65%)
+        }
+
+        #us {
+            transform: translate(46%,0%);
+        }
+
+        #po {
+            transform: translate(25%,0%);
+        }
+
+        #op {
+            transform: translate(35%, 0%);
+            color: black;
+        }
+
+        #dol {
+            transform: translateX(8%);
+        }
+        #g {
+            transform: translateX(5%);
+        }
+        #kk{
+            transform: translateX(8%);
+        }
+    </style>
+
+<h2 id="us">Usuń</h2>
+
+<h1 id="po">Czy na pewno usunąć wybrany budżet? </h1>
+
+<h2 id="g">UWAGA! Wraz z budżetem zostaną usunięte wszystkie przypisane do niego wydatki.</h2>
+<div id="op">
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmountBud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmountBud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateBud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateBud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameBud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameBud)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" id="dol">
+            <input type="submit" value="Usuń" id="usun" class="btn btn-default" />
+
+        </div>
+        <h3 id="kk">   @Html.ActionLink("Powrót do listy", "Index")  </h3>
+    }
+</div>

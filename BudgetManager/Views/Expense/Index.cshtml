@@ -1,0 +1,152 @@
+﻿@model PagedList.IPagedList<BudgetManager.Models.Expense>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<style>
+    #Tworz {
+        padding-bottom: 10px;
+    }
+
+    #tabelka {
+        background-color: rgba(238, 242, 233,.7);
+    }
+
+    #tytul {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #wykrKat {
+        padding-right: 20px;
+        background-color: cadetblue;
+        border-color: cadetblue;
+    }
+
+    #wykrUz {
+        background-color: cadetblue;
+        border-color: cadetblue;
+    }
+
+    #szuk {
+        transform: translate(70%, 0%);
+    }
+
+    #guz {
+        transform: translate(0%, 100%)
+    }
+</style>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 id="tytul">Wszystkie wydatki</h1>
+
+
+
+<p>
+    <h3 id="Tworz">  @Html.ActionLink("Dodaj wydatek", "Create") </h3>
+</p>
+
+
+<br />
+<br />
+<div class="container">
+    <div class="form-group">
+        <div id="guz">
+            <input type="button" class="btn btn-default" id="wykrKat" value="Wykres kategorii" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Expense") + "'");" />
+            <input type="button" class="btn btn-default" id="wykrUz" value="Wykres użytkowników" onclick="@("window.location.href='" + @Url.Action("ChartUser", "Expense") + "'");" />
+        </div>
+        <div class="input-group" id="szuk">
+
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Szukaj" class="form-control" />
+
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            Tytuł Budżetu
+        </th>
+        <th>
+         
+            @Html.ActionLink("Kategoria", "Index", new { sortOrder = ViewBag.NameSortParm })
+
+        </th>
+        <th>
+            Nazwa użytkownika
+        </th>
+        <th>
+            Opis
+
+        </th>
+        <th>
+            Kwota
+        </th>
+        <th>
+            @Html.ActionLink("Data Wydatku", "Index", new { sortOrder = ViewBag.DateSortParm })
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.Budget.NameBud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.NazwaKat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.NazwaUzyt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateExp)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.ExpenseID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ExpenseID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort }))
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

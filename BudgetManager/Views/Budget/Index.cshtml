@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BudgetManager.Models.Budget>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+     #Tworz{
+     padding-bottom: 10px;
+     
+    }
+       #tytul{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+          #tabelka{
+        background-color: rgba(238, 242, 233,.7);
+       
+    }
+</style>
+
+<h1 id="tytul">Wszystkie budżety</h1>
+
+<p >
+    <h3 id="Tworz">@Html.ActionLink("Stwórz nowy", "Create")</h3> 
+</p>
+
+
+
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            Budżet:
+        </th>
+        <th>
+           Miesiąc:
+        </th>
+        <th>
+           Tytuł:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmountBud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameBud)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.BudgetID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.BudgetID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.BudgetID })
+            </td>
+        </tr>
+    }
+
+</table>

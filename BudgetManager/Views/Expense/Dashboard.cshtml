@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+    <script src="~/Scripts/Chart.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #chart_container {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #ddd;
+            padding: 1px;
+           transform: translate(70%, 0%);
+            border-radius: 4px;
+            background-color: rgba(238, 242, 233,.7);
+        }
+        #tytul{
+            transform: translate(25%, 0%);
+            padding-bottom: 30px;
+            padding-top: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2 id="tytul">
+        Sumy wydatków dla poszczególnych kategorii
+    </h2>
+
+    <div id="chart_container">
+        <canvas id="bar_chart">
+          
+        </canvas>
+
+    </div>
+
+    <script>
+        var repArray = @Html.Raw(Json.Encode(ViewBag.REP));
+        var ages = @Html.Raw(Json.Encode(ViewBag.AGES));
+
+        var ctx = $("#bar_chart");
+        var bacChart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    label: "Suma w kategorii",
+                    data: repArray,
+                    backgroundColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)", "rgb(242,166,54)",
+                    "rgb(145,65,72)", "rgb(74,25,92)","rgb(242,166,54)","rgb(145,65,72)","rgb(74,25,92)"],
+
+                    borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)", "rgb(74,25,92)", "rgb(74,25,92)",
+                    "rgb(74,25,92)", "rgb(74,25,92)", "rgb(74,25,92)", "rgb(74,25,92)"],
+                    borderWidth:1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {display:false}
+            }
+        });
+
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,66 @@
+﻿@model BudgetManager.Models.Expense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expense</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget.NameBud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Budget.NameBud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.NazwaKat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.NazwaKat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.NazwaUzyt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.NazwaUzyt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateExp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateExp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExpenseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,65 @@
+﻿@model BudgetManager.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    <style>
+        #formularz {
+            transform: translate(25%, 0%);
+            color:black;
+        }
+
+        #stworz {
+            transform: translate(50%, 0%);
+            padding-top: 30px;
+        }
+
+        #wyd {
+            transform: translate(25%, 0%);
+            padding-bottom: 17px;
+        }
+
+        #dodaj {
+            transform: translate(8%, 0%);
+        }
+
+        #powr {
+            transform: translate(47%, 0%);
+        }
+    </style>
+
+<h2 id="stworz">Stwórz</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" id="formularz">
+        <h4 id="wyd">Użytkownik</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NazwaUzyt, "Nazwa użytkownika:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NazwaUzyt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NazwaUzyt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="dodaj">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Stwórz" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="powr">
+    <h3>  @Html.ActionLink("Powrót do listy", "Index") </h3> 
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
